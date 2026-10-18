@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Ilakkiya Akka 💗</title>
+<style>
+:root{--pink:#ffb6d9;--hot:#e95ba8;--lav:#c9b6ff;--deep:#7352b8;--cream:#fff8ff}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Trebuchet MS",Arial,sans-serif;color:#613d83;background:linear-gradient(135deg,#fff0f8,#f0e8ff);min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(#fff 1.5px,transparent 1.5px);background-size:28px 28px;opacity:.6}
+.wrap{width:min(920px,94%);margin:auto;padding:28px 0 50px;position:relative}
+header{text-align:center;padding:18px 10px 8px}
+.pill{display:inline-block;background:#fff9;border:1px solid #fff;padding:8px 15px;border-radius:99px;color:#a64c91;font-size:.9rem}
+h1{font-size:clamp(2rem,7vw,4rem);line-height:1.08;margin:14px 0 8px;color:#8d55bd;text-shadow:2px 3px #fff}
+.subtitle{font-size:1.1rem;color:#a64c91}
+.card{background:#ffffffd9;border:2px solid #fff;border-radius:28px;padding:clamp(18px,4vw,34px);box-shadow:0 15px 45px #8c60ad20;text-align:center;margin:20px 0;backdrop-filter:blur(5px)}
+.bears{display:flex;justify-content:center;align-items:end;gap:clamp(12px,5vw,48px);margin:8px 0 18px}
+.bear{font-size:clamp(4.5rem,14vw,8rem);display:inline-block;animation:bob 2s ease-in-out infinite;filter:drop-shadow(0 7px 3px #8d55bd20)}
+.bear:nth-child(2){animation-delay:.5s;transform:scaleX(-1)}
+@keyframes bob{0%,100%{translate:0 0;rotate:-2deg}50%{translate:0 -10px;rotate:2deg}}
+.speech{background:#fff0f8;border:2px solid #ffd2e8;border-radius:22px;padding:15px 18px;max-width:620px;margin:0 auto 20px;font-size:1.1rem;line-height:1.7}
+button,.btn{border:0;border-radius:999px;padding:13px 22px;font-size:1rem;font-weight:700;cursor:pointer;color:white;background:linear-gradient(100deg,#ee76b7,#9b78e8);box-shadow:0 7px 15px #b47bc744;transition:transform .2s,filter .2s}
+button:hover,.btn:hover{transform:translateY(-2px);filter:saturate(1.1)}
+.small{font-size:.9rem;color:#9a75b4}
+.hidden{display:none!important}
+.gifts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.gift{background:linear-gradient(145deg,#fff1f8,#f0eaff);border:2px solid white;border-radius:22px;padding:20px 10px;min-height:160px;color:#8055ad}
+.gift .emoji{font-size:3.5rem;display:block;margin-bottom:8px;animation:wiggle 3s infinite}
+@keyframes wiggle{0%,90%,100%{transform:rotate(0)}93%{transform:rotate(-7deg)}96%{transform:rotate(7deg)}}
+.gift p{margin:7px 0 14px;font-weight:700}
+.gift button{font-size:.88rem;padding:10px 14px}
+.result{margin-top:22px;background:#fff5fb;border:2px dashed #e8a9d4;border-radius:22px;padding:20px;line-height:1.7}
+.chocolate{font-size:4rem}
+.cake{font-size:5rem;animation:bob 2s infinite}
+.letter{text-align:left;white-space:pre-line;line-height:1.9;background:linear-gradient(145deg,#fffafd,#f6f0ff);border:1px solid #efd9ff;border-radius:18px;padding:22px;font-size:1.02rem}
+.confetti{position:fixed;top:-30px;z-index:5;pointer-events:none;animation:fall 4s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(600deg);opacity:.2}}
+footer{text-align:center;padding:15px;color:#a16caa;font-size:.9rem}
+@media(max-width:600px){.gifts{grid-template-columns:1fr}.gift{min-height:0}.gift .emoji{font-size:3rem}.card{border-radius:22px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="pill">A tiny surprise made with lots of love 🎀</div>
+<h1>Happy Birthday,<br>Ilakkiya Akka! 💗</h1>
+<div class="subtitle">A little world in your favourite pink & violet colours 💜</div>
+</header>
+
+<section class="card" id="welcome">
+<div class="bears"><span class="bear" aria-label="teddy bear">🧸</span><span class="bear" aria-label="teddy bear">🧸</span></div>
+<div class="speech" id="speech">🐻: Hiiiii Akkaaa! 💕<br>🐻: Happy kuvaa kuvaa day! 😘🫂<br><strong>We have a little surprise for you!</strong> 🎁</div>
+<button onclick="showGifts()">Click for your surprise! 🎁💝</button>
+<p class="small">Made especially for you, Akka 🩷</p>
+</section>
+
+<section class="card hidden" id="giftSection">
+<h2>Three little gifts, just for you! 🎀</h2>
+<p>Choose a gift box to open it 💗</p>
+<div class="gifts">
+<div class="gift"><span class="emoji">🎁</span><p>Gift 1 · Sweet surprise</p><button onclick="openGift(1)">Open Gift 🍫</button></div>
+<div class="gift"><span class="emoji">🎁</span><p>Gift 2 · Birthday magic</p><button onclick="openGift(2)">Open Gift 🎂</button></div>
+<div class="gift"><span class="emoji">🎁</span><p>Gift 3 · From my heart</p><button onclick="openGift(3)">Open Gift 💌</button></div>
+</div>
+<div id="result" class="result hidden" aria-live="polite"></div>
+</section>
+<footer>Made with love for Ilakkiya Akka 💗🧸💜</footer>
+</div>
+<script>
+function confetti(){
+ const symbols=["💗","💜","✨","💕","🎀","🌸"];
+ for(let i=0;i<24;i++){
+  const el=document.createElement("span");el.className="confetti";
+  el.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+  el.style.left=Math.random()*100+"vw";el.style.animationDelay=Math.random()*1.4+"s";
+  el.style.fontSize=(16+Math.random()*18)+"px";document.body.appendChild(el);
+  setTimeout(()=>el.remove(),5000);
+ }
+}
+function showGifts(){
+ document.getElementById("giftSection").classList.remove("hidden");
+ document.getElementById("giftSection").scrollIntoView({behavior:"smooth",block:"start"});
+ confetti();
+}
+const letter = `Hi akka !!
+           Happy kuvaa kuvaa day 😘🫂 ni epaiyum happy ah irukkanum... 🤗 Eppaiyum siruchutteh iru kaaaa😍... Yaarukkavagum unna vittu kudukkadha okay..😊 I am always with you akka... 🫂🤗 Unakku enna venu nallu en ta kelu apram edhavadhu kastama irukku yaarutaiyum solla mudiyalana enakku oru call panni un ta pesata nu mattu kelu naa parandhu vandhuruvah🫂 unakku naa eppaiyum iruppa naama korean dramas ahhhh pakkalam ni enakku epaiyum reels anuppanum Naanum unakku reels anuppuvah okay...🥰 Once again many more wish you a very happy birthday my dear akka...😘💗🫂`;
+function openGift(n){
+ const r=document.getElementById("result");r.classList.remove("hidden");
+ if(n===1) r.innerHTML='<div class="chocolate">🍫🍬</div><h2>Happy Birthday, Akka! 💗</h2><p>A sweet little chocolate hug for the sweetest akka! 🫂💕</p>';
+ if(n===2) r.innerHTML='<div class="cake">🎂</div><h2>Make a wish, Ilakkiya! ✨</h2><p>May your days be full of laughter, love, K-dramas and happy moments! 💜🩷</p><p>🎉🎀🎉</p>';
+ if(n===3) r.innerHTML='<h2>💌 A letter just for you, Akka</h2><div class="letter"></div>';
+ if(n===3) r.querySelector(".letter").textContent=letter;
+ r.scrollIntoView({behavior:"smooth",block:"center"});confetti();
+}
+</script>
+</body>
+</html>
