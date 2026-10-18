@@ -38,15 +38,42 @@ button:hover,.btn:hover{transform:translateY(-2px);filter:saturate(1.1)}
 @keyframes fall{to{transform:translateY(110vh) rotate(600deg);opacity:.2}}
 footer{text-align:center;padding:15px;color:#a16caa;font-size:.9rem}
 @media(max-width:600px){.gifts{grid-template-columns:1fr}.gift{min-height:0}.gift .emoji{font-size:3rem}.card{border-radius:22px}}
+
+/* Memories gallery */
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:22px}
+.memory{margin:0;padding:8px;background:linear-gradient(145deg,#fff,#f8eaff);border:2px solid white;border-radius:20px;box-shadow:0 8px 24px #8c60ad20;overflow:hidden}
+.memory img,.memory video{display:block;width:100%;height:260px;object-fit:cover;border-radius:14px}
+.memory figcaption{padding:10px 5px 4px;font-weight:700;color:#a64c91}
+.gallery-title{margin-bottom:5px}
+#fireworks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:8}
+.firework-note{font-size:.95rem;color:#a64c91;margin:8px 0 0}
+@media(max-width:600px){.gallery{grid-template-columns:1fr}.memory img,.memory video{height:auto;max-height:430px;object-fit:contain;background:#fff0f8}}
 </style>
 </head>
 <body>
+<canvas id="fireworks" aria-hidden="true"></canvas>
 <div class="wrap">
 <header>
 <div class="pill">A tiny surprise made with lots of love 🎀</div>
 <h1>Happy Birthday,<br>Ilakkiya Akka! 💗</h1>
 <div class="subtitle">A little world in your favourite pink & violet colours 💜</div>
 </header>
+
+<section class="card" id="memories">
+<h2 class="gallery-title">Our Little Memory Album 📸💗</h2>
+<p>Little moments, big smiles, and memories to keep forever 🫂💜</p>
+<div class="gallery">
+<figure class="memory"><img src="photos/memory1.jpg" alt="Friends smiling together" loading="lazy"><figcaption>Smiles that make memories 💗</figcaption></figure>
+<figure class="memory"><img src="photos/memory2.jpg" alt="A happy group selfie" loading="lazy"><figcaption>Our happy little gang 🩷</figcaption></figure>
+<figure class="memory"><img src="photos/memory3.jpg" alt="Friends sharing a selfie" loading="lazy"><figcaption>One more for the memories ✨</figcaption></figure>
+<figure class="memory"><img src="photos/memory4.jpg" alt="A close-up happy selfie" loading="lazy"><figcaption>Keep smiling, Akka! 🌸</figcaption></figure>
+<figure class="memory"><img src="photos/memory5.jpg" alt="Friends together on a trip" loading="lazy"><figcaption>Good times together 🫂</figcaption></figure>
+<figure class="memory"><img src="photos/memory6.jpg" alt="Friends posing together" loading="lazy"><figcaption>Forever a favourite memory 💜</figcaption></figure>
+<figure class="memory"><img src="photos/memory7.jpg" alt="Three friends smiling" loading="lazy"><figcaption>More laughter, always! 🎀</figcaption></figure>
+<figure class="memory"><video controls playsinline preload="metadata"><source src="photos/memory-video.mp4" type="video/mp4">Your browser does not support this video.</video><figcaption>A little video memory 🎬💕</figcaption></figure>
+</div>
+<p class="firework-note">Tap the surprise button for extra birthday fireworks! 🎆</p>
+</section>
 
 <section class="card" id="welcome">
 <div class="bears"><span class="bear" aria-label="teddy bear">🧸</span><span class="bear" aria-label="teddy bear">🧸</span></div>
@@ -68,7 +95,28 @@ footer{text-align:center;padding:15px;color:#a16caa;font-size:.9rem}
 <footer>Made with love for Ilakkiya Akka 💗🧸💜</footer>
 </div>
 <script>
+const fwCanvas=document.getElementById('fireworks');
+const fwCtx=fwCanvas.getContext('2d'); let fwParticles=[]; let fwFrame=0;
+function sizeFireworks(){fwCanvas.width=window.innerWidth*devicePixelRatio;fwCanvas.height=window.innerHeight*devicePixelRatio;fwCtx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0)}
+window.addEventListener('resize',sizeFireworks); sizeFireworks();
+function launchFireworks(){
+ for(let burst=0;burst<4;burst++){
+  const x=50+Math.random()*(window.innerWidth-100), y=60+Math.random()*(window.innerHeight*.55);
+  const colors=['#ff70b7','#b59aff','#ffd166','#ffffff','#f48fb1'];
+  for(let i=0;i<44;i++){const a=Math.PI*2*i/44, speed=1.2+Math.random()*3.2;fwParticles.push({x,y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,life:55+Math.random()*25,max:80,color:colors[Math.floor(Math.random()*colors.length)],size:1.5+Math.random()*2})}
+ }
+ if(!fwFrame) animateFireworks();
+}
+function animateFireworks(){
+ fwCtx.clearRect(0,0,window.innerWidth,window.innerHeight);
+ fwParticles=fwParticles.filter(p=>p.life>0);
+ for(const p of fwParticles){p.x+=p.vx;p.y+=p.vy;p.vy+=.025;p.vx*=.99;p.life--;fwCtx.globalAlpha=Math.max(0,p.life/p.max);fwCtx.fillStyle=p.color;fwCtx.beginPath();fwCtx.arc(p.x,p.y,p.size,0,Math.PI*2);fwCtx.fill()}
+ fwCtx.globalAlpha=1;
+ if(fwParticles.length){fwFrame=requestAnimationFrame(animateFireworks)}else{fwFrame=0;fwCtx.clearRect(0,0,window.innerWidth,window.innerHeight)}
+}
+
 function confetti(){
+ launchFireworks();
  const symbols=["💗","💜","✨","💕","🎀","🌸"];
  for(let i=0;i<24;i++){
   const el=document.createElement("span");el.className="confetti";
